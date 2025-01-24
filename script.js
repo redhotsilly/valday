@@ -1,48 +1,41 @@
 function handleResponse(isYes) {
     const celebration = document.getElementById('celebration');
-    const container = document.querySelector('.container');
+    const emojiOverlay = document.querySelector('.emoji-overlay');
+    
+    // Clear previous emojis
+    emojiOverlay.innerHTML = '';
     
     if (isYes) {
         celebration.innerHTML = "🏈 GAME-WINNING LOVE TOUCHDOWN! 🏆";
-        celebration.style.display = 'block';
-        playCheer();
-
+        
         // Add football and heart emojis
         const footballEmojis = ['🏈', '❤️', '🏆', '💘'];
-        footballEmojis.forEach((emoji) => {
-            createFloatingEmoji(emoji, container);
-        });
+        createFloatingEmojis(footballEmojis);
     } else {
         celebration.innerHTML = "Timeout of the Heart 💔";
-        celebration.style.display = 'block';
-
+        
         // Add sad emojis
         const sadEmojis = ['😢', '😭', '🥺', '👎'];
-        sadEmojis.forEach((emoji) => {
-            createFloatingEmoji(emoji, container);
-        });
+        createFloatingEmojis(sadEmojis);
     }
+    
+    playCheer();
 }
 
-function createFloatingEmoji(emoji, container) {
-    const emojiElement = document.createElement('div');
-    emojiElement.textContent = emoji;
-    emojiElement.classList.add('floating-emoji');
+function createFloatingEmojis(emojis) {
+    const emojiOverlay = document.querySelector('.emoji-overlay');
     
-    // Random positioning across the entire container
-    emojiElement.style.left = `${Math.random() * 100}%`;
-    emojiElement.style.top = `${Math.random() * 100}%`;
-    
-    // Add slight random rotation and delay
-    emojiElement.style.animationDelay = `-${Math.random() * 3}s`;
-    emojiElement.style.transform = `rotate(${Math.random() * 360}deg)`;
-    
-    container.appendChild(emojiElement);
-
-    // Remove emoji after animation
-    setTimeout(() => {
-        container.removeChild(emojiElement);
-    }, 6000);
+    emojis.forEach(() => {
+        const emoji = document.createElement('div');
+        emoji.classList.add('floating-emoji');
+        
+        // Randomize position and emoji
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = `${Math.random() * 100}%`;
+        emoji.style.top = `${Math.random() * 100}%`;
+        
+        emojiOverlay.appendChild(emoji);
+    });
 }
 
 function playCheer() {
