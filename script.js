@@ -1,4 +1,6 @@
 function handleResponse(isYes) {
+    const celebration = document.getElementById('celebration');
+    const emojiOverlay = document.querySelector('.emoji-overlay');
     
     // Clear previous emojis
     emojiOverlay.innerHTML = '';
