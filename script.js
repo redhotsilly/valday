@@ -1,30 +1,37 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const message = document.getElementById("message");
-    const playButton = document.getElementById("playButton");
-    const resetButton = document.getElementById("resetButton");
+let football = document.getElementById("football");
+let message = document.getElementById("message");
+let playButton = document.getElementById("playButton");
+let resetButton = document.getElementById("resetButton");
 
-    let animationInterval;
+let animationInterval;
+let footballPosition = 0;
 
-    const startAnimation = () => {
-        let position = 0;
-        const speed = 5;
-        const direction = 1;
+function startAnimation() {
+    // Start or continue the animation
+    football.style.animation = "moveFootball 5s linear infinite";
+    playButton.disabled = true; // Disable play button once animation starts
+    resetButton.disabled = false; // Enable reset button
+}
 
-        animationInterval = setInterval(() => {
-            position += speed * direction;
-            message.style.transform = `translateX(${position}px)`;
+function resetAnimation() {
+    // Reset the football position
+    clearInterval(animationInterval);
+    football.style.animation = "none"; // Reset the animation
+    footballPosition = 0;
+    football.style.left = footballPosition + "px"; // Reset football to starting position
+    playButton.disabled = false; // Enable play button
+    resetButton.disabled = true; // Disable reset button
+}
 
-            if (position > 200 || position < -200) {
-                position = -position;
-            }
-        }, 50);
-    };
+@keyframes moveFootball {
+    0% {
+        left: 0%;
+    }
+    50% {
+        left: 90%;
+    }
+    100% {
+        left: 0%;
+    }
+}
 
-    const stopAnimation = () => {
-        clearInterval(animationInterval);
-        message.style.transform = "translateX(0)";
-    };
-
-    playButton.addEventListener("click", startAnimation);
-    resetButton.addEventListener("click", stopAnimation);
-});
