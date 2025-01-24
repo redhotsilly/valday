@@ -3,9 +3,6 @@ let message = document.getElementById("message");
 let playButton = document.getElementById("playButton");
 let resetButton = document.getElementById("resetButton");
 
-let animationInterval;
-let footballPosition = 0;
-
 function startAnimation() {
     // Start or continue the animation
     football.style.animation = "moveFootball 5s linear infinite";
@@ -15,10 +12,10 @@ function startAnimation() {
 
 function resetAnimation() {
     // Reset the football position
-    clearInterval(animationInterval);
     football.style.animation = "none"; // Reset the animation
-    footballPosition = 0;
-    football.style.left = footballPosition + "px"; // Reset football to starting position
+    setTimeout(() => {
+        football.style.left = "0"; // Reset football to starting position
+    }, 10); // Delay for resetting properly
     playButton.disabled = false; // Enable play button
     resetButton.disabled = true; // Disable reset button
 }
@@ -34,4 +31,3 @@ function resetAnimation() {
         left: 0%;
     }
 }
-
