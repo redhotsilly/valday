@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine Jumbotron</title>
+    <title>Valentine's Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="jumbotron">
-            <div class="scoreboard">
-                <span class="score" id="scoreText">Will you be my Valentine, Babu?</span>
-            </div>
-            <div class="controls">
-                <button id="playButton" class="btn" onclick="startGame()">Play</button>
-                <button id="resetButton" class="btn" onclick="resetGame()">Reset</button>
-            </div>
+    <div class="jumbotron">
+        <div class="question">
+            Will you be my valentine babu?
         </div>
+        <div class="buttons">
+            <button onclick="handleResponse(true)">Heck Yeah!</button>
+            <button onclick="handleResponse(false)">Penalty Pass</button>
+        </div>
+        <div id="celebration"></div>
+        <div class="banner left">YAY!</div>
+        <div class="banner right">WE WON!</div>
+        <div class="emoji-container left-emojis"></div>
+        <div class="emoji-container right-emojis"></div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
-
