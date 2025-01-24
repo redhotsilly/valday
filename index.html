@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day Jumbotron</title>
+    <title>Valentine Jumbotron</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <div class="jumbotron">
-            <div class="football" id="football"></div>
-            <div class="message" id="message">Will you be my Valentine, Babu?</div>
-        </div>
-        <div class="controls">
-            <button id="playButton" onclick="startAnimation()">Play</button>
-            <button id="resetButton" onclick="resetAnimation()">Reset</button>
+            <div class="scoreboard">
+                <span class="score" id="scoreText">Will you be my Valentine, Babu?</span>
+            </div>
+            <div class="controls">
+                <button id="playButton" class="btn" onclick="startGame()">Play</button>
+                <button id="resetButton" class="btn" onclick="resetGame()">Reset</button>
+            </div>
         </div>
     </div>
 
