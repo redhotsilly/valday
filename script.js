@@ -1,72 +1,48 @@
 function handleResponse(isYes) {
     const celebration = document.getElementById('celebration');
-    const leftBanner = document.querySelector('.banner.left');
-    const rightBanner = document.querySelector('.banner.right');
-    const leftEmojis = document.querySelector('.left-emojis');
-    const rightEmojis = document.querySelector('.right-emojis');
-    
-    // Reset banners and emojis
-    leftBanner.textContent = isYes ? 'YAY!' : 'BOOO!';
-    rightBanner.textContent = isYes ? 'WE WON!' : 'NO WAY!';
-    leftEmojis.innerHTML = '';
-    rightEmojis.innerHTML = '';
+    const container = document.querySelector('.container');
     
     if (isYes) {
         celebration.innerHTML = "🏈 GAME-WINNING LOVE TOUCHDOWN! 🏆";
         celebration.style.display = 'block';
         playCheer();
 
-        // Animate banners
-        setTimeout(() => {
-            leftBanner.style.opacity = '1';
-        }, 1000);
-        setTimeout(() => {
-            rightBanner.style.opacity = '1';
-        }, 1500);
-
         // Add football and heart emojis
         const footballEmojis = ['🏈', '❤️', '🏆', '💘'];
-        footballEmojis.forEach((emoji, index) => {
-            setTimeout(() => {
-                const emojiLeft = document.createElement('div');
-                const emojiRight = document.createElement('div');
-                emojiLeft.textContent = emoji;
-                emojiRight.textContent = emoji;
-                emojiLeft.style.left = `${Math.random() * 50}%`;
-                emojiRight.style.right = `${Math.random() * 50}%`;
-                leftEmojis.appendChild(emojiLeft);
-                rightEmojis.appendChild(emojiRight);
-                
-                setTimeout(() => {
-                    leftEmojis.style.opacity = '1';
-                    rightEmojis.style.opacity = '1';
-                }, 100);
-            }, index * 500);
+        footballEmojis.forEach((emoji) => {
+            createFloatingEmoji(emoji, container);
         });
     } else {
         celebration.innerHTML = "Timeout of the Heart 💔";
         celebration.style.display = 'block';
 
-        // Add boo and crying emojis
+        // Add sad emojis
         const sadEmojis = ['😢', '😭', '🥺', '👎'];
-        sadEmojis.forEach((emoji, index) => {
-            setTimeout(() => {
-                const emojiLeft = document.createElement('div');
-                const emojiRight = document.createElement('div');
-                emojiLeft.textContent = emoji;
-                emojiRight.textContent = emoji;
-                emojiLeft.style.left = `${Math.random() * 50}%`;
-                emojiRight.style.right = `${Math.random() * 50}%`;
-                leftEmojis.appendChild(emojiLeft);
-                rightEmojis.appendChild(emojiRight);
-                
-                setTimeout(() => {
-                    leftEmojis.style.opacity = '1';
-                    rightEmojis.style.opacity = '1';
-                }, 100);
-            }, index * 500);
+        sadEmojis.forEach((emoji) => {
+            createFloatingEmoji(emoji, container);
         });
     }
+}
+
+function createFloatingEmoji(emoji, container) {
+    const emojiElement = document.createElement('div');
+    emojiElement.textContent = emoji;
+    emojiElement.classList.add('floating-emoji');
+    
+    // Random positioning across the entire container
+    emojiElement.style.left = `${Math.random() * 100}%`;
+    emojiElement.style.top = `${Math.random() * 100}%`;
+    
+    // Add slight random rotation and delay
+    emojiElement.style.animationDelay = `-${Math.random() * 3}s`;
+    emojiElement.style.transform = `rotate(${Math.random() * 360}deg)`;
+    
+    container.appendChild(emojiElement);
+
+    // Remove emoji after animation
+    setTimeout(() => {
+        container.removeChild(emojiElement);
+    }, 6000);
 }
 
 function playCheer() {
