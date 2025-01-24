@@ -1,36 +1,30 @@
-const playButton = document.getElementById('play-button');
-const resetButton = document.getElementById('reset-button');
-const jumbotron = document.querySelector('.jumbotron');
+document.addEventListener("DOMContentLoaded", () => {
+    const message = document.getElementById("message");
+    const playButton = document.getElementById("playButton");
+    const resetButton = document.getElementById("resetButton");
 
-function createHeart() {
-  const heart = document.createElement('div');
-  heart.classList.add('moving-hearts');
-  heart.innerHTML = '❤️';
-  heart.style.left = `${Math.random() * 100}%`;
-  heart.style.animationDuration = `${3 + Math.random() * 2}s`; // Random speed
-  heart.style.fontSize = `${15 + Math.random() * 30}px`; // Random size
-  jumbotron.appendChild(heart);
+    let animationInterval;
 
-  // Remove heart after animation ends
-  setTimeout(() => {
-    heart.remove();
-  }, 5000);
-}
+    const startAnimation = () => {
+        let position = 0;
+        const speed = 5;
+        const direction = 1;
 
-function startAnimation() {
-  playButton.disabled = true;
-  const heartInterval = setInterval(createHeart, 300);
+        animationInterval = setInterval(() => {
+            position += speed * direction;
+            message.style.transform = `translateX(${position}px)`;
 
-  // Stop creating hearts after 10 seconds
-  setTimeout(() => {
-    clearInterval(heartInterval);
-    playButton.disabled = false;
-  }, 10000);
-}
+            if (position > 200 || position < -200) {
+                position = -position;
+            }
+        }, 50);
+    };
 
-function resetAnimation() {
-  jumbotron.querySelectorAll('.moving-hearts').forEach((heart) => heart.remove());
-}
+    const stopAnimation = () => {
+        clearInterval(animationInterval);
+        message.style.transform = "translateX(0)";
+    };
 
-playButton.addEventListener('click', startAnimation);
-resetButton.addEventListener('click', resetAnimation);
+    playButton.addEventListener("click", startAnimation);
+    resetButton.addEventListener("click", stopAnimation);
+});
